@@ -1,6 +1,6 @@
 module Fixy
   module Decorator
-    class Debug
+    class Html
       class << self
         def document(document)
           '<html>

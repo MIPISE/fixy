@@ -1,5 +1,6 @@
-require 'fixy/decorator/debug'
+require 'fixy/decorator/csv'
 require 'fixy/decorator/default'
+require 'fixy/decorator/html'
 require 'fixy/document'
 require 'fixy/formatter/alphanumeric'
 require 'fixy/record'

@@ -1,16 +1,15 @@
 module Fixy
   class Document
+    attr_accessor :content, :decorator
 
-    attr_accessor :content, :debug_mode
-
-    def generate_to_file(path, debug = false)
+    def generate_to_file(path, decorator: Fixy::Decorator::Default)
       File.open(path, 'w') do |file|
-        file.write(generate(debug))
+        file.write(generate(decorator))
       end
     end
 
-    def generate(debug = false)
-      @debug_mode = debug
+    def generate(decorator = Fixy::Decorator::Default)
+      @decorator = decorator
       @content = ''
 
       # Generate document based on user logic.
@@ -25,20 +24,16 @@ module Fixy
       raise NotImplementedError
     end
 
-    def decorator
-      debug_mode ? Fixy::Decorator::Debug : Fixy::Decorator::Default
-    end
-
     def prepend_record(record)
-      @content = record.generate(debug_mode) << @content
+      @content = record.generate(decorator) << @content
     end
 
     def append_record(record)
-      @content << record.generate(debug_mode)
+      @content << record.generate(decorator)
     end
 
     def parse_record(klass, record)
-      @content << klass.parse(record, debug_mode)[:record]
+      @content << klass.parse(record, decorator)[:record]
     end
   end
 end

@@ -78,14 +78,13 @@ module Fixy
       end
 
       # Parse an existing record
-      def parse(record, debug = false)
+      def parse(record, decorator = Fixy::Decorator::Default)
         raise ArgumentError, 'Record must be a string'  unless record.is_a? String
 
         unless record.bytesize == record_length
           raise ArgumentError, "Record length is invalid (Expected #{record_length})"
         end
 
-        decorator = debug ? Fixy::Decorator::Debug : Fixy::Decorator::Default
         fields = []
         output = ''
         current_position = 1
@@ -119,8 +118,7 @@ module Fixy
     end
 
     # Generate the entry based on the record structure
-    def generate(debug = false)
-      decorator = debug ? Fixy::Decorator::Debug : Fixy::Decorator::Default
+    def generate(decorator = Fixy::Decorator::Default)
       output = ''
       current_position = 1
       current_record = 1

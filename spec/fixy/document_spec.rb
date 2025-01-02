@@ -43,12 +43,12 @@ describe 'Defining a Document' do
 
     it 'should generate fixed width document' do
       PeopleDocument.new.generate.should eq "Arcturus  Mengsk    \nSarah     Kerrigan  \nJim       Raynor    \n"
-      PeopleDocument.new.generate(true).should eq File.read('spec/fixtures/debug_document.txt')
+      PeopleDocument.new.generate.should eq File.read('spec/fixtures/debug_document.txt')
     end
 
     it 'should parse fixed width document' do
       ParsedPeopleDocument.new.generate.should eq "Arcturus  Mengsk    \nSarah     Kerrigan  \nJim       Raynor    \n"
-      ParsedPeopleDocument.new.generate(true).should eq File.read('spec/fixtures/debug_document.txt')
+      ParsedPeopleDocument.new.generate.should eq File.read('spec/fixtures/debug_document.txt')
     end
   end
 end

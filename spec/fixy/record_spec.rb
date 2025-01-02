@@ -80,7 +80,7 @@ describe 'Generating a Record' do
 
     context 'when using the debug flag' do
       it 'should produce a debug log' do
-        PersonRecordE.new.generate(true).should eq File.read('spec/fixtures/debug_record.txt')
+        PersonRecordE.new.generate.should eq File.read('spec/fixtures/debug_record.txt')
       end
     end
   end
@@ -223,7 +223,7 @@ describe 'Parsing a record' do
   let(:multibyte_record) { 'älimuk   Karil     ' }
   context 'with a record of multi-byte characters' do
     it 'should not raise with the right number of bytes' do
-      PersonRecordE.parse(multibyte_record, true).should eq({
+      PersonRecordE.parse(multibyte_record, Fixy::Decorator::Default).should eq({
         record: File.read('spec/fixtures/debug_parsed_multibyte_record.txt'),
       fields: [
         { name: :first_name, value: 'älimuk   '},
@@ -280,7 +280,7 @@ describe 'Parsing a record' do
 
     context 'when using the debug flag' do
       it 'should produce a debug log' do
-        PersonRecordE.parse(record, true).should eq({
+        PersonRecordE.parse(record, Fixy::Decorator::Default).should eq({
           record: File.read('spec/fixtures/debug_parsed_record.txt'),
           fields: [
             { name: :first_name, value: 'Sarah     '},
